@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>mi-app-titanes-web-2026</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#000;color:#FFD700;font-family:Arial}
+.oculto{display:none!important}
+.pantalla{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px}
+.caja{width:100%;max-width:480px;border:2px solid gold;border-radius:20px;background:#0f0f0f;padding:20px}
+h1,h2{color:gold;text-align:center;margin:5px 0} h1{font-size:14px;color:#888}
+label{color:gold;font-size:11px;margin:8px 0 3px 3%;display:block}
+input{width:96%;padding:11px;border-radius:25px;border:1px solid gold;background:#000;color:#fff;text-align:center;margin:0 2%}
+.fila{display:flex;gap:8px} .fila div{flex:1}
+.btn{width:96%;padding:13px;border-radius:30px;font-weight:bold;border:none;margin:10px 2%;cursor:pointer}
+.btn-blanco{background:#fff;color:#000} .btn-verde{background:#00c851;color:#fff}
+.top{position:fixed;top:0;left:0;right:0;height:56px;background:#0a0a0a;border-bottom:2px solid gold;display:flex;align-items:center;justify-content:space-between;padding:0 10px;z-index:50}
+.buscador{flex:1;margin:0 10px} .buscador input{width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;padding:66px 10px 10px 10px}
+.card{background:#151515;border:1px solid #333;border-radius:14px;padding:8px;text-align:center}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:10px;background:#000}
+.precio{background:#fff;color:#000;border:none;padding:7px;border-radius:20px;font-weight:bold;width:94%;margin:4px 0}
+.desc{color:#0f0;font-size:11px}
+.menu-lat{position:fixed;top:56px;bottom:0;background:#111;border-right:2px solid gold;width:270px;left:-100%;transition:.3s;z-index:60;padding:15px;overflow:auto}
+.menu-lat.activo{left:0}
+.menu-lat div{padding:12px;border-bottom:1px solid #222;cursor:pointer}
+#perfil{position:fixed;top:56px;bottom:0;right:-100%;width:350px;background:#111;border-left:2px solid gold;transition:.3s;z-index:60;padding:12px;overflow:auto}
+#perfil.activo{right:0}
+.url{padding:8px;font-size:11px;margin:3px 0;width:96%;border-radius:20px;border:1px solid gold;background:#000;color:#fff;text-align:center}
+</style>
+</head>
+<body>
 
+<!-- LOGIN -->
+<div id="login" class="pantalla">
+<div class="caja">
+<h1>Archivo / Iniciar sesión / mi-app-titanes-web-2026</h1>
+<h2 style="margin-top:10px">Iniciar Sesión</h2>
+<label>Usuario</label><input id="lu" placeholder="Usuario">
+<label>Contraseña</label><input id="lp" type="password" placeholder="Contraseña">
+<div style="text-align:center;color:#666;margin:8px">o</div>
+<button class="btn btn-blanco" onclick="entrar()">Iniciar Sesión</button>
+<button class="btn" style="background:#111;color:gold;border:1px solid gold" onclick="ver('registro')">Registrarse</button>
+</div>
+</div>
+
+<!-- REGISTRO -->
+<div id="registro" class="pantalla oculto">
+<div class="caja">
+<h2>Crear Cuenta</h2>
+<div class="fila"><div><label>1er Nombre</label><input id="n1"></div><div><label>2do Nombre</label><input id="n2"></div></div>
+<div class="fila"><div><label>1er Apellido</label><input id="a1"></div><div><label>2do Apellido</label><input id="a2"></div></div>
+<div class="fila"><div><label>1er Apodo</label><input id="apodo"></div><div><label>Usuario</label><input id="ruser"></div></div>
+<div class="fila"><div><label>Contraseña</label><input id="rpass" type="password"></div><div><label>1er E-mail</label><input id="m1"></div></div>
+<div class="fila"><div><label>2do E-mail</label><input id="m2"></div><div><label>Fecha escribir 00/00/0000</label><input id="fecha" type="date"></div></div>
+<div class="fila"><div><label>Edad</label><input id="edad" type="number"></div><div><label>Ciudad</label><input id="ciudad"></div><div><label>Estado</label><input id="estado"></div></div>
+<div class="fila"><div><label>País</label><input id="pais"></div><div><label>Teléfono</label><input id="tel"></div></div>
+<div style="border:1px dashed #333;border-radius:10px;padding:8px;margin:10px 0">
+<label style="color:#fff">Novedades de Mi APP</label>
+<label style="color:#ccc"><input type="checkbox" id="chk" checked style="width:auto"> Checkbox - Acepto novedades</label>
+</div>
+<button class="btn btn-blanco" onclick="registrar()">Registrar y Iniciar Sesión Automáticamente</button>
+</div>
+</div>
+
+<!-- APP 900 PRODUCTOS -->
+<div id="app" class="oculto">
+<div class="top">
+<span style="font-size:26px;cursor:pointer" onclick="toggle('menu')">☰</span>
+<div class="buscador"><input id="busca" placeholder="🔍 Buscador 900 productos..." onkeyup="buscar()"></div>
+<span style="font-size:26px;cursor:pointer" onclick="toggle('perfil')">👤</span>
+</div>
+
+<div id="menu" class="menu-lat">
+<h3 style="color:gold">Archivo</h3>
+<div>📁 Archivo</div>
+<div onclick="alert('Ajustes Titanes 2026')">⚙️ Ajustes</div>
+<div onclick="alert('Configuración')">🔧 Configuración</div>
+<div onclick="alert('Licencia MIT Titanes 2026')">📜 Licencia</div>
+<div onclick="alert('Idioma: Español')">🌐 Idioma</div>
+<div>📦 Etcétera</div>
+<div style="color:red;margin-top:20px" onclick="location.reload()">🚪 Cerrar sesión</div>
+</div>
+
+<div id="perfil">
+<h3 style="color:gold;text-align:center">Perfil</h3>
+<center><img id="fotoP" src="https://via.placeholder.com/120/000/FFD700?text=TITAN" style="border-radius:50%;border:2px solid gold;width:110px;height:110px"></center>
+<input class="url" id="fotoUrl" placeholder="Foto URL" oninput="fotoP.src=this.value">
+<button class="btn" style="background:gold;color:#000;font-size:12px;padding:8px" onclick="compartir()">Compartir enlace de perfil 🔗</button>
+<p id="linkPerfil" style="font-size:10px;color:#888;word-break:break-all;text-align:center"></p>
+<h4 style="color:gold;font-size:12px">9 URL - Es para pegas los links</h4><div id="box9"></div>
+<h4 style="color:gold;font-size:12px">4 URL links Webs</h4><div id="box4"></div>
+<button class="btn btn-verde" onclick="guardar()">Botón guardar verde - Y listo</button>
+</div>
+
+<div class="grid" id="grid"></div>
+</div>
+
+<script>
+function ver(id){login.classList.add('oculto');registro.classList.add('oculto');app.classList.add('oculto');document.getElementById(id).classList.remove('oculto')}
+function toggle(id){document.getElementById(id).classList.toggle('activo')}
+function entrar(){if(lu.value==""){alert("Usuario");return;} localStorage.setItem('usuario_titan',lu.value); iniciarApp();}
+function registrar(){if(ruser.value==""){alert("Usuario requerido");return;} localStorage.setItem('usuario_titan',ruser.value); alert("¡Cuenta creada! Iniciando automáticamente TITAN"); iniciarApp();}
+function iniciarApp(){
+ ver('app');
+ let g=document.getElementById('grid'); g.innerHTML="";
+ for(let i=1;i<=900;i++){ let pre=Math.floor(Math.random()*900)+99; let des=Math.floor(Math.random()*60)+10; g.innerHTML+=`<div class="card prod" data-n="${i} Producto Titanes"><img src="https://picsum.photos/400/500?random=${i}" loading="lazy"><div style="color:gold;font-size:12px">Producto #${i}</div><button class="precio">$${pre} - ${des}% OFF</button><div class="desc">-${des}% descuento</div></div>`; }
+ let b9=""; for(let i=1;i<=9;i++) b9+=`<input class="url" id="u${i}" placeholder="URL ${i} pega link">`; box9.innerHTML=b9;
+ let b4=""; for(let i=1;i<=4;i++) b4+=`<input class="url" id="w${i}" placeholder="Web URL ${i}">`; box4.innerHTML=b4;
+ linkPerfil.innerText="https://titanes-mi-tienda-web-de-mexico-para-el.onrender.com/?perfil="+ (localStorage.getItem('usuario_titan')||'titan');
+}
+function buscar(){ let t=busca.value.toLowerCase(); document.querySelectorAll('.prod').forEach(c=>{c.style.display=c.dataset.n.toLowerCase().includes(t)?'':'none'})}
+function guardar(){ alert("¡Guardado verde y listo!"); perfil.classList.remove('activo');}
+function compartir(){ navigator.clipboard.writeText(linkPerfil.innerText); alert("¡Enlace de perfil copiado! "+linkPerfil.innerText); }
+</script>
+</body>
+  </html>
